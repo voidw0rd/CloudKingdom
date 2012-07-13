@@ -1,8 +1,11 @@
+import os
+
 # Django settings for CloudKingdom project.
 EC2_ACCESS_KEY='3bcZOKym6SFUJMUF4m8mXjyzZlF0mI9McnGw'
 EC2_SECRET_KEY='dQhXkZsxdEvtinlnd5D6s4iSitn733m0fQrYA'
 EC2_HOST = "194.102.62.130"
 EC2_PORT = "8773"
+SESSION_COOKIE_AGE = 60000
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -10,13 +13,14 @@ TEMPLATE_DEBUG = DEBUG
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
-
+STATIC_FILE_PATH = os.path.join(os.getcwd(), "static")
+DB_PATH = STATIC_FILE_PATH + '/am.db'
 MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': DB_PATH,                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -52,7 +56,7 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = STATIC_FILE_PATH
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -67,7 +71,7 @@ STATIC_ROOT = ''
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = '/static/'
+STATIC_URL = STATIC_FILE_PATH
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -113,6 +117,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.path.join(os.getcwd(), "templates")
 )
 
 INSTALLED_APPS = (
@@ -122,6 +127,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'CloudManager'
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:

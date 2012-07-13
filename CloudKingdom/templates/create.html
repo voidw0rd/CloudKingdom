@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>SimpleAdmin - Full width page</title>
+	
+	<!-- Stylesheets -->
+	<link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet'>
+	<link rel="stylesheet" href="css/style.css">
+	
+	<!-- Optimize for mobile devices -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	
+	<!-- jQuery & JS files -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script src="js/script.js"></script>  
+</head>
+<body>
+
+	<!-- TOP BAR -->
+	<div id="top-bar">
+		
+		<div class="page-full-width cf">
+
+			<ul id="nav" class="fl">
+	
+				<li class="v-sep"><a href="#" class="round button dark ic-left-arrow image-left">Go to website</a></li>
+				<li class="v-sep"><a href="#" class="round button dark menu-user image-left">Logged in as <strong>admin</strong></a>
+					<ul>
+						<li><a href="#">My Profile</a></li>
+						<li><a href="#">User Settings</a></li>
+						<li><a href="#">Change Password</a></li>
+						<li><a href="#">Log out</a></li>
+					</ul> 
+				</li>
+			
+				<li><a href="#" class="round button dark menu-email-special image-left">3 new messages</a></li>
+				<li><a href="#" class="round button dark menu-logoff image-left">Log out</a></li>
+				
+			</ul> <!-- end nav -->
+
+					
+			<form action="#" method="POST" id="search-form" class="fr">
+				<fieldset>
+					<input type="text" id="search-keyword" class="round button dark ic-search image-right" placeholder="Search..." />
+					<input type="hidden" value="SUBMIT" />
+				</fieldset>
+			</form>
+
+		</div> <!-- end full-width -->	
+	
+	</div> <!-- end top-bar -->
+	
+	
+	
+	<!-- HEADER -->
+	<div id="header-with-tabs">
+		
+		<div class="page-full-width cf">
+	
+			<ul id="tabs" class="fl">
+				<li><a href="/" class="active-tab">Create Instance</a></li>
+				<li><a href="/list/" class="">List instances</a></li>
+			</ul> <!-- end tabs -->
+			
+			<!-- Change this image to your own company's logo -->
+			<!-- The logo will automatically be resized to 30px height. -->
+			<a href="#" id="company-branding-small" class="fr"><img src="images/company-logo.png" alt="Blue Hosting" /></a>
+			
+		</div> <!-- end full-width -->	
+
+	</div> <!-- end header -->
+	
+	
+	
+	<!-- MAIN CONTENT -->
+	<div id="content">
+		
+		<div class="page-full-width cf">
+				<div class="content-module">
+					<div class="content-module-heading cf">
+
+						<h3 class="fl">Eucalyptus Images - Basic Config</h3>
+						<span class="fr expand-collapse-text">Click to collapse</span>
+						<span class="fr expand-collapse-text initial-expand">Click to expand</span>
+
+					</div> <!-- end content-module-heading -->
+					<div class="content-module-main">
+
+						<form action="#">
+							<fieldset>
+								<p>
+									<label for="zInput">Instance Name</label>
+									<input type="text" id="zInput" class="round default-width-input" />
+								</p>
+							</fieldset>								
+						</form>	
+
+					</div> <!-- end content-module-main -->
+				</div> <!-- end content-module -->
+
+
+
+				<div class="content-module">
+				
+					<div class="content-module-heading cf">
+					
+						<h3 class="fl">Select Image / size</h3>
+						<span class="fr expand-collapse-text">Click to collapse</span>
+						<span class="fr expand-collapse-text initial-expand">Click to expand</span>
+					
+					</div> <!-- end content-module-heading -->
+					
+					
+					<div class="content-module-main">
+					
+						<table>
+						
+							<thead>
+						
+								<tr>
+									<th>+</th>
+									<th>Id</th>
+									<th>Name</th>
+									<th>Driver</th>
+								</tr>
+							
+							</thead>
+	
+							<tfoot>
+								<tr>
+									<td colspan="5" class="table-footer">
+
+									</td>
+								</tr>
+							</tfoot>
+							
+							<tbody>
+								{% for item in images %}
+								<tr>
+									<td><input type="radio" onclick="change_img(this)" value={{ item.id }} name="img"></td>
+									<td id="img_id"> {{ item.id }} </td>
+									<td id="img_name"> {{ item.name }} </td>
+									<td id="img_driver"> {{ item.driver }} </td>
+								</tr>
+								{% endfor %}
+							
+							</tbody>
+							
+						</table>
+
+						<table>
+							<thead>
+						
+								<tr>
+									<th>+</th>
+									<th>id</th>
+									<th>name</th>
+									<th>disk</th>
+									<th>ram</th>
+									<th>uuid</th>
+								</tr>
+							
+							</thead>
+							<tfoot>
+								<tr>
+									<td colspan="5" class="table-footer">
+
+									</td>
+								</tr>
+							</tfoot>
+							<tbody>
+								{% for item in sizes %}
+								<tr>
+									<td><input type="radio" onclick="change_size(this)" value={{ item.id }} name="size"></td>
+									<td id="size_id"> {{ item.id }} </td>
+									<td id="size_name"> {{ item.name }} </td>
+									<td id="size_disk"> {{ item.disk }} </td>
+									<td id="size_ram"> {{ item.ram }} </td>
+									<td id="size_uuid"> {{ item.uuid }} </td>
+								</tr>
+								{% endfor %}
+							</tbody>
+
+						</table>
+					
+					</div> <!-- end content-module-main -->
+				
+				</div> <!-- end content-module -->
+	<div class="content-module">
+		<div class="content-module-heading cf">
+			<h3 class="fl">Finish / Submit</h3>
+			<span class="fr expand-collapse-text">Click to collapse</span>
+			<span class="fr expand-collapse-text initial-expand">Click to expand</span>
+		</div> <!-- end content-module-heading -->	
+		<div class="content-module-main">
+			<table>
+				<tr>
+					<td class="zz-table-cell">✔</td>
+					<td id="instance-name">  </td>
+					<td> </td>
+					<td> </td>
+					<td> </td>
+					<td> </td>
+				</tr>
+
+				<tr id="finish_img">
+					<td class="zz-table-cell">✔</td>
+					<td id="img_id"></td>
+					<td id="img_name"></td>
+					<td id="img_driver"></td>
+					<td> </td>
+					<td> </td>
+				</tr>
+				<tr id="finish_size">
+					<td class="zz-table-cell">✔</td>
+					<td id="size_id"></td>
+					<td id="size_name"></td>
+					<td id="size_disk"></td>
+					<td id="size_ram"></td>
+					<td id="size_uuid"></td>
+				</tr>
+			</table>
+			<form action="#">
+				<fieldset>
+					<input id="submit_request" type="submit" value="Submit Button" class="round blue ic-right-arrow fr" />
+				</fieldset>
+			</form>
+		</div> 	<!-- end content-module-main -->
+	</div> <!-- end content-module -->				
+	
+	
+	<!-- FOOTER -->
+	<div id="footer">
+
+		<p>&copy; Copyright 2012 <a href="http://math.uvt.ro/">West University of Timisoara</a>. All rights reserved.</p>
+		<p><strong>Cloud Kingdom</strong> by <a href="#">Alin Paulesc</a></p>
+	
+	</div> <!-- end footer -->
+
+</body>
+</html>
